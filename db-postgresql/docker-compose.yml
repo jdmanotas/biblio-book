@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  postgres-biblio:
+    image: postgres:14.1
+    restart: always
+    environment:
+      - POSTGRES_DB=bibliodb
+      - POSTGRES_USER=jdmanotas
+      - POSTGRES_PASSWORD=Calidad2020*-
+    ports:
+      - '5434:5432'
+    volumes:
+      - ./data/:/var/lib/postgresql/data
+  
