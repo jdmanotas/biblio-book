@@ -3,6 +3,8 @@ package com.bibliobook.apibook.entity;
 import com.bibliobook.apibook.model.PersistentObject;
 import com.bibliobook.apibook.entity.Autor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,15 +30,12 @@ public class Libro extends PersistentObject implements Serializable {
     @Column(name ="nombre", length = 128, nullable = false)
     private String nombre;
 
+    @Column(name ="idautor", nullable = false)
+    private Long idautor;
     /*
-    @ManyToOne
-    @JoinColumn(name = "idautor", referencedColumnName = "id", nullable = false, insertable = false, updatable = false) // Clave foránea que referencia a la tabla 'autor'
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idautor", nullable = false)
+    @JsonIgnoreProperties("libros")
     private Autor autor;
     */
-
-    @ManyToOne
-    @JoinColumn(name = "idautor", nullable = false, insertable = false, updatable = false) // Clave foránea que referencia a la tabla 'autor'
-    @JsonBackReference
-    private Autor autor;
-
 }

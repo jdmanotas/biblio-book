@@ -35,7 +35,7 @@ public class Autor extends PersistentObject implements Serializable {
     @Column(name ="email", length = 32, nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "idautor", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Libro> libros = new ArrayList<>();
 
