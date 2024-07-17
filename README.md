@@ -148,3 +148,286 @@ CREATE TABLE public.libro (
          **Índices (INDEX):**
         - **idx_libro_nombre**: Crea un índice B-tree en el campo nombre, lo cual mejora la eficiencia de las consultas que se filtren o busquen por nombre del libro.
         - **idx_libro_isbn**: Índice B-tree en el campo isbn  para optimizar las consultas que utilicen este campo como filtro.
+
+## PRUEBAS API
+- **Metodos API autor:**
+
+    **Crear Autor**
+    ```
+    Metodo: POST
+    URL: http://localhost:8091/api/v1/autor
+    
+    Body:
+    {
+        "identificacion": "79855645",
+        "nombres": "Juanes",
+        "apellidos": "Paz",
+        "email": "juan.perez1@gmail.com",
+        "user_reg": "admin"
+    }
+    
+    Resultado:
+
+    {
+        "id": 1,
+        "code": "bc3bd7ac-e411-42cd-be4c-11c78ea4e2e4",
+        "status": 1,
+        "user_reg": "admin",
+        "user_mod": null,
+        "created_at": "2024-07-17T12:04:20.0617051",
+        "updated_at": null,
+        "identificacion": "79855645",
+        "nombres": "Juanes",
+        "apellidos": "Paz",
+        "email": "juan.perez1@gmail.com",
+        "libros": []
+    }
+
+    ```
+
+    **Listar Autores**
+    ```
+    Metodo: GET
+    URL: http://localhost:8091/api/v1/autores
+    
+    Resultado:
+
+    [
+        {
+            "id": 1,
+            "code": "bc3bd7ac-e411-42cd-be4c-11c78ea4e2e4",
+            "status": 1,
+            "user_reg": "admin",
+            "user_mod": null,
+            "created_at": "2024-07-17T12:04:20.061705",
+            "updated_at": null,
+            "identificacion": "1001001001",
+            "nombres": "Juan",
+            "apellidos": "Castillo",
+            "email": "juan.castillo@gmail.com",
+            "libros": []
+        },
+        {
+            "id": 2,
+            "code": "8d8f1b40-e80e-4a11-b8f7-522b9957b746",
+            "status": 1,
+            "user_reg": "admin",
+            "user_mod": null,
+            "created_at": "2024-07-17T12:11:06.87643",
+            "updated_at": null,
+            "identificacion": "79800200",
+            "nombres": "Gabriel",
+            "apellidos": "Garcia Marquez",
+            "email": "gabriel.garcia.marquez@yahoo.com",
+            "libros": []
+        }
+    ]
+    ```
+
+    **Actualizar Autor**
+    ```
+    Metodo: PUT
+    Parametro: recibe el idAutor que se va actualizar 
+    URL: http://localhost:8091/api/v1/autor/1
+
+    Body:
+
+    {
+        "identificacion": "1001001001",
+        "nombres": "Juan",
+        "apellidos": "Castillo",
+        "email": "juan.castillo@gmail.com",
+    }
+    
+    Resultado:
+
+    {
+        "id": 1,
+        "code": "bc3bd7ac-e411-42cd-be4c-11c78ea4e2e4",
+        "status": 1,
+        "user_reg": "admin",
+        "user_mod": null,
+        "created_at": "2024-07-17T12:04:20.061705",
+        "updated_at": null,
+        "identificacion": "1001001001",
+        "nombres": "Juan",
+        "apellidos": "Castillo",
+        "email": "juan.castillo@gmail.com",
+        "libros": []
+    }
+
+    ```
+
+    **Eliminar Autor**
+    ```
+    Metodo: DELETE
+    Parametro: recibe el idAutor que se va eliminar 
+    URL: http://localhost:8091/api/v1/autor/1
+    
+    Resultado:
+
+    Status: 204 --> Fue eliminado con exito.
+
+    ```
+
+- **Metodos API libro:**
+
+    **Crear Libro**
+    ```
+    Metodo: POST
+    URL: http://localhost:8091/api/v1/libro
+    
+    Body:
+    {
+        "isbn": "978-1-4028-9462-6",
+        "nombre": "La Odisea",
+        "user_reg": "admin",
+        "autor": {
+            "id": 1
+        }
+    }
+    
+    Resultado:
+
+    {
+        "id": 1,
+        "code": "dc4897fb-af48-44a7-b7da-11ebb9798428",
+        "status": 1,
+        "user_reg": "admin",
+        "user_mod": null,
+        "created_at": "2024-07-17T15:12:40.4765832",
+        "updated_at": null,
+        "isbn": "978-1-4028-2222-6",
+        "nombre": "Las revelion de las ratas",
+        "autor": {
+            "id": 1,
+            "code": "937e8b82-cec4-44bb-bbd4-b15278e80837",
+            "status": 1,
+            "user_reg": "admin",
+            "user_mod": null,
+            "created_at": "2024-07-17T15:12:40.4765832",
+            "updated_at": null,
+            "identificacion": null,
+            "nombres": null,
+            "apellidos": null,
+            "email": null,
+            "libros": []
+        }
+    }
+
+    ```
+
+    **Listar Libros**
+    ```
+    Metodo: GET
+    URL: http://localhost:8091/api/v1/libros
+    
+    Resultado:
+
+    [
+        {
+            "id": 1,
+            "code": "dc4897fb-af48-44a7-b7da-11ebb9798428",
+            "status": 1,
+            "user_reg": "admin",
+            "user_mod": null,
+            "created_at": "2024-07-17T15:12:40.476583",
+            "updated_at": null,
+            "isbn": "978-1-4028-2222-6",
+            "nombre": "Las revelion de las ratas",
+            "autor": {
+                "id": 1,
+                "code": "c8fa8205-73b9-4490-8a6b-3395dde61af6",
+                "status": 1,
+                "user_reg": "admin",
+                "user_mod": null,
+                "created_at": "2024-07-17T15:11:41.327758",
+                "updated_at": null,
+                "identificacion": "79800200",
+                "nombres": "Gabriel",
+                "apellidos": "Garcia Marquez",
+                "email": "gabriel.garcia.marquez@yahoo.com"
+            }
+        },
+        {
+            "id": 2,
+            "code": "6a75ca40-fa80-4a3f-a528-751110557c9f",
+            "status": 1,
+            "user_reg": "admin",
+            "user_mod": null,
+            "created_at": "2024-07-17T15:40:18.063408",
+            "updated_at": null,
+            "isbn": "978-1-4028-7777-6",
+            "nombre": "Ilusion de un Principiante",
+            "autor": {
+                "id": 3,
+                "code": "b1538311-bf17-4ad7-a7da-0e4ddbf476a3",
+                "status": 1,
+                "user_reg": "admin",
+                "user_mod": null,
+                "created_at": "2024-07-17T15:39:33.031076",
+                "updated_at": null,
+                "identificacion": "66666",
+                "nombres": "Claudia",
+                "apellidos": "Ferrero",
+                "email": "claudia.ferrero@gmail.com"
+            }
+        }
+    ]
+    ```
+
+    **Actualizar Libro**
+    ```
+    Metodo: PUT
+    Parametro: recibe el idAutor que se va actualizar 
+    URL: http://localhost:8091/api/v1/libro/1
+
+    Body:
+
+    {
+        "isbn": "999-0-06-112225-9",
+        "nombre": "Cronicas de una muerte anunciada",
+	    "user_mod": "admin"
+    }
+    
+    Resultado:
+
+    {
+        "id": 1,
+        "code": "dc4897fb-af48-44a7-b7da-11ebb9798428",
+        "status": 1,
+        "user_reg": "admin",
+        "user_mod": null,
+        "created_at": "2024-07-17T15:12:40.476583",
+        "updated_at": null,
+        "isbn": "999-0-06-112225-9",
+        "nombre": "Cronicas de una muerte anunciada",
+        "autor": {
+            "id": 1,
+            "code": "c8fa8205-73b9-4490-8a6b-3395dde61af6",
+            "status": 1,
+            "user_reg": "admin",
+            "user_mod": null,
+            "created_at": "2024-07-17T15:11:41.327758",
+            "updated_at": null,
+            "identificacion": "79800200",
+            "nombres": "Gabriel",
+            "apellidos": "Garcia Marquez",
+            "email": "gabriel.garcia.marquez@yahoo.com"
+        }
+    }
+
+    ```
+
+    **Eliminar Libro**
+    ```
+    Metodo: DELETE
+    Parametro: recibe el idLibro que se va eliminar 
+    URL: http://localhost:8091/api/v1/libro/4
+    
+    Resultado:
+
+    Status: 204 --> Fue eliminado con exito.
+
+    ```
+    
