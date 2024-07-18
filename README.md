@@ -1,4 +1,4 @@
-![kupilogo](./db-postgresql/images/logobiblio.jpg)
+![bibliologo](./db-postgresql/images/logobiblio.jpg)
 # biblio-book
 [![Docker](https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Docker Compose](https://img.shields.io/badge/docker--compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/compose/)
@@ -430,4 +430,70 @@ CREATE TABLE public.libro (
     Status: 204 --> Fue eliminado con exito.
 
     ```
-    
+
+## COMPILACION DELPROYECTO
+## Generacion del archivo *.jar con mave
+Nos ubicamos en la carpeta del proyecto y corremos el comando:
+
+```
+mvn clean package
+```
+
+A continuacion la imagen:
+
+![iamgejar](./db-postgresql/images/img-appjar.jpg)
+
+
+## CREACION DE LA IMAGEN DOCKER (contenedor)
+## Archivo Dockerfile
+
+```
+    # Usa una imagen base de OpenJDK 17 en Alpine para reducir el tamaño de la imagen
+    FROM openjdk:17-jdk-alpine
+
+    # Establece el directorio de trabajo dentro del contenedor
+    WORKDIR /app
+
+    # Copia el archivo JAR generado por Maven (asegúrate de que el nombre del archivo JAR sea correcto)
+    COPY ./app.jar app.jar
+
+    # Define el comando de entrada para ejecutar la aplicación Spring Boot
+    ENTRYPOINT ["java", "-jar", "app.jar"]
+
+    # Expone el puerto en el que la aplicación Spring Boot está configurada para escuchar
+    EXPOSE 8091
+```
+
+## Comando crear imagen Docker
+
+```
+    docker build -t apibook-app .
+```
+
+## IMAGEN GENERADA A PARTIR DEL Dockerfile
+## Imagen Docker
+
+![iamgejar](./db-postgresql/images/docker-image.jpg)
+
+
+## IMAGEN EN DOCKERHUB
+## Comandos Upload (repositorio)
+```
+
+    docker tag apibook-app:latest jdmanotas/apibook-app:latest
+    docker login
+    docker push jdmanotas/apibook-app:latest
+
+```
+
+## Imagen en Repositorio Dockerhub (repositorio)
+
+![iamgejar](./db-postgresql/images/img-dockerhub.jpg)
+
+## Comando para bajar Imagen en Repositorio Dockerhub (repositorio)
+
+![iamgejar](./db-postgresql/images/command-download-img.jpg)
+
+```
+    docker pull jdmanotas/apibook-app
+```
