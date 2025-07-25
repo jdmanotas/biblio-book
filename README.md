@@ -150,6 +150,9 @@ CREATE TABLE public.libro (
         - **idx_libro_isbn**: Índice B-tree en el campo isbn  para optimizar las consultas que utilicen este campo como filtro.
 
 ## PRUEBAS API
+
+<img width="1871" height="798" alt="image" src="https://github.com/user-attachments/assets/249a57fa-fbf9-498b-8043-4552a8ada714" />
+
 - **Metodos API autor:**
 
     **Crear Autor**
